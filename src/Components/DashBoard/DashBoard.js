@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import trash from "./../../assets/waste_bin_red.svg";
 import { connect } from 'react-redux';
+import {removeItem} from './../../ducks/reducer';
 
 function DashBoard(props) {
     // should have mapper here
@@ -13,7 +14,7 @@ function DashBoard(props) {
                 <div className='Image'>
                 <img src={item.imageUrl} alt="Home Image" height="42" width="42" />
                 </div>
-                {/* <img src={trash} alt="delete" onClick={() => props.remove(i)} /> */}
+                <img src={trash} alt="delete" onClick={() => props.remove(i)} height='20' width='20'/>
                 <p>Property Name:{item.propertyName}</p>
                 <p>Address:{item.address}</p>
                 <p>City:{item.city}</p>
@@ -43,19 +44,20 @@ function DashBoard(props) {
 }
 
 function mapStateToProps(reduxState) {
+    console.log(reduxState)
     return {
         list: reduxState.list
     }
 }
 
-//   const mapDispatchToProps = {
-//     remove:removeItem
-//   }
+  const mapDispatchToProps = {
+    remove:removeItem
+  }
 
 
 
 
 
-const connectComponent = connect(mapStateToProps)(DashBoard); // makes a connection to the redux data
+const connectComponent = connect(mapStateToProps,mapDispatchToProps)(DashBoard); // makes a connection to the redux data
 
 export default connectComponent;

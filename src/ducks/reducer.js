@@ -2,7 +2,7 @@ const initalState = {               // memory
     propertyName: '',
     address: '',
     city: '',
-    state: '',
+    stateinput: '',
     zip: 0,
     imageUrl: '',
     monthlyMortgageAmount: 0,
@@ -32,43 +32,80 @@ const initalState = {               // memory
 const STEP_ONE = 'STEP_ONE';
 const STEP_TWO = 'STEP_TWO';
 const STEP_THREE = 'STEP_THREE';
+const REMOVE_ITEM = 'REMOVE_ITEM'; 
 
 
 export default function reducer(state = initalState, action) {          //brain of the reducer
     console.log('reducer', action)
+    console.log('state',state)
     switch (action.type) {
         case STEP_ONE:
+        let {propertyName,address,city,stateinput,zip} = action.payload;
+        return {...state,propertyName: propertyName,
+        address: address,
+        city: city,
+        state: stateinput,
+        zip: zip}    
         
         case STEP_TWO:
+        return {...state,imageUrl:action.payload}
 
         case STEP_THREE:
+        let {desiredMonthlyRent,monthlyMortgageAmount} = action.payload;
+        state = {...state,desiredMonthlyRent:desiredMonthlyRent,monthlyMortgageAmount:monthlyMortgageAmount};
+        let newItem = {propertyName: state.propertyName,
+        address: state.address,
+        city: state.city,
+        state: state.stateinput,
+        zip: state.zip,
+        imageUrl: state.imageUrl,
+        monthlyMortgageAmount: state.monthlyMortgageAmount,
+        desiredMonthlyRent: state.desiredMonthlyRent
+        }        
+        let newlist = state.list.slice();
+        newlist.push(newItem);
+        return{...state,list:newlist}
+
+        case REMOVE_ITEM:
+        let newList = state.list.slice();
+            newList.splice(action.payload,1)
+            console.log('Item deleted', newList)
+            return {...state,list:newList}
 
         default:
             return state;
     }
 }
 
-export function stepone(input) {
+export function stepone(infoObj) {
 
-    console.log("step one fired")
+    console.log("step one fired", infoObj)
     return {
         type: STEP_ONE,
-        payload: input
+        payload: infoObj
     }
 }
 
-export function steptwo(input) {
-    console.log('step two fired');
+export function steptwo(imgUrl) {
+    console.log('step two fired',imgUrl);
     return {
         type: STEP_TWO,
-        payload: input
+        payload: imgUrl
     }
 }
 
-export function stepthree(input) {
+export function stepthree(infoObj) {
     console.log('step three fired');
     return {
         type: STEP_THREE,
-        payload: input
+        payload: infoObj
+    }
+}
+
+export function removeItem(index) {
+    console.log('remove button fired')
+    return{
+        type: REMOVE_ITEM,
+        payload: index
     }
 }
