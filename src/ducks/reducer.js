@@ -7,36 +7,17 @@ const initalState = {               // memory
     imageUrl: '',
     monthlyMortgageAmount: 0,
     desiredMonthlyRent: 0,
-    list: [{
-        propertyName: 'Test Name',
-        address: 'Test Address',
-        city: 'Test City',
-        state: 'Test State',
-        zip: 0,
-        imageUrl: 'https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/242ce817-97a3-48fe-9acd-b1bf97930b01/09-posterization-opt.jpg',
-        monthlyMortgageAmount: 100,
-        desiredMonthlyRent: 200
-    }, {
-        propertyName: 'Test Name1',
-        address: 'Test Address1',
-        city: 'Test City1',
-        state: 'Test State1',
-        zip: 1,
-        imageUrl: 'https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/242ce817-97a3-48fe-9acd-b1bf97930b01/09-posterization-opt.jpg',
-        monthlyMortgageAmount: 150,
-        desiredMonthlyRent: 250
-    }
-    ]
+    list: []
 }
 
 const STEP_ONE = 'STEP_ONE';
 const STEP_TWO = 'STEP_TWO';
 const STEP_THREE = 'STEP_THREE';
 const REMOVE_ITEM = 'REMOVE_ITEM'; 
+const GET_LIST = 'GET_LIST';
 
 
 export default function reducer(state = initalState, action) {          //brain of the reducer
-    console.log('reducer', action)
     console.log('state',state)
     switch (action.type) {
         case STEP_ONE:
@@ -64,6 +45,7 @@ export default function reducer(state = initalState, action) {          //brain 
         }        
         let newlist = state.list.slice();
         newlist.push(newItem);
+        
         return{...state,list:newlist}
 
         case REMOVE_ITEM:
@@ -71,6 +53,9 @@ export default function reducer(state = initalState, action) {          //brain 
             newList.splice(action.payload,1)
             console.log('Item deleted', newList)
             return {...state,list:newList}
+        
+        case GET_LIST:
+        return {...state,list:action.payload}   
 
         default:
             return state;
@@ -107,5 +92,13 @@ export function removeItem(index) {
     return{
         type: REMOVE_ITEM,
         payload: index
+    }
+}
+
+export function getList(arr){
+    console.log('get list fired ',arr)
+    return{
+        type: GET_LIST,
+        payload:arr
     }
 }

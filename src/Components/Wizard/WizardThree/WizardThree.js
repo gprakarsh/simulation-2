@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { stepthree } from './../../../ducks/reducer';
+import axios from 'axios';
 
 class WizardThree extends Component {
     constructor() {
@@ -26,6 +27,11 @@ class WizardThree extends Component {
             desiredMonthlyRent:this.state.desiredMonthlyRent    
         }
         this.props.stepthree(infoObj)
+        
+        let sendObj = this.props.list[this.props.list.length-1]
+        axios.post(`/api/houser/add`,sendObj).then(()=>{
+            console.log(sendObj,'Added object')
+        })
     }
 
 

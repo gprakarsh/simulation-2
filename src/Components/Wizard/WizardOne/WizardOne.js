@@ -12,6 +12,7 @@ class WizardOne extends Component{
             city: '',
             state: '',
             zip: 0
+        
         };
     }
 
