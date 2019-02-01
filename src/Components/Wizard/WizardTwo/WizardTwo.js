@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 export default function WizardTwo(props) {
     return (
@@ -12,8 +13,8 @@ export default function WizardTwo(props) {
                 <input />
             </div>
             <div className='WizardTwoFooter'>
-            <button>Previous Step</button>
-            <button>Next Step</button>
+            <Link to='/wizard/step1'><button>Previous Step</button></Link>
+            <Link to='/wizard/step3'><button>Next Step</button></Link>
             </div>
         </div>
     )

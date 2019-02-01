@@ -1,12 +1,13 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 export default function DashBoard(props) {
     // should have mapper here
     return (
         <div>
             <div className='DashBoardHeader'>
-                <p>DashBoard</p>
-                <button>Add New Property</button>
+                <h1>DashBoard</h1>
+                <Link to='/wizard/step1'><button>Add New Property</button></Link>
             </div>
             <div>
                 Home Listings
