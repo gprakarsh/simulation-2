@@ -27,8 +27,8 @@ class WizardThree extends Component {
             desiredMonthlyRent:this.state.desiredMonthlyRent    
         }
         this.props.stepthree(infoObj)
-        
-        let sendObj = this.props.list[this.props.list.length-1]
+        let sendObj = this.props.list[0];
+        console.log(sendObj,'sendobj')
         axios.post(`/api/houser/add`,sendObj).then(()=>{
             console.log(sendObj,'Added object')
         })
@@ -60,7 +60,9 @@ class WizardThree extends Component {
 }
 
 function mapStateToProps(reduxState) {
-    return reduxState
+    return {
+        list:reduxState.list
+    }
 }
 
 //output new info to redux 

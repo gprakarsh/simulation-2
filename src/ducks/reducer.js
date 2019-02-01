@@ -44,7 +44,7 @@ export default function reducer(state = initalState, action) {          //brain 
         desiredMonthlyRent: state.desiredMonthlyRent
         }        
         let newlist = state.list.slice();
-        newlist.push(newItem);
+        newlist.unshift(newItem);
         
         return{...state,list:newlist}
 
