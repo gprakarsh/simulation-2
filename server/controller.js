@@ -8,14 +8,15 @@ module.exports={
         })   
     },
     createProperty:(req, res) => {
-        const {propertyName,address,city,stateinput,zip,imageUrl,desiredMonthlyRent,monthlyMortgageAmount} = req.body;
-        req.app.get('db').create_property([propertyName,address,city,stateinput,zip,imageUrl,desiredMonthlyRent,monthlyMortgageAmount])
+        const {propertyname,address,city,state,zip,imageurl,monthlymortgageamount,desiredmonthlyrent} = req.body;
+        req.app.get('db').create_property([propertyname,address,city,state,zip,imageurl,monthlymortgageamount,desiredmonthlyrent])
             .then(() => {
                 res.sendStatus(200)
             })
     },
     deleteProperty:(req, res) => {
         const { id } = req.params
+        console.log(id)
         req.app.get('db').delete_property(id).then(() => {
             res.sendStatus(200)
         })

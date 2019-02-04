@@ -1,10 +1,14 @@
 import React from 'react';
+import houser from './../../assets/houser.png';
+import './Header.css';
 
-export default function Header (props){
-    return(
+export default function Header(props) {
+    return (
         <div>
-          <img src="" alt="" height="42" width="42"/>
-          <p>Houser</p>  
+            <header>
+                <img src={houser} alt="Houser" height="25" />
+                <h2>Houser</h2>
+            </header>
         </div>
     )
 }

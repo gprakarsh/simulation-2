@@ -7,7 +7,8 @@ const initalState = {               // memory
     imageUrl: '',
     monthlyMortgageAmount: 0,
     desiredMonthlyRent: 0,
-    list: []
+    list: [],
+    item:{}
 }
 
 const STEP_ONE = 'STEP_ONE';
@@ -34,19 +35,17 @@ export default function reducer(state = initalState, action) {          //brain 
         case STEP_THREE:
         let {desiredMonthlyRent,monthlyMortgageAmount} = action.payload;
         state = {...state,desiredMonthlyRent:desiredMonthlyRent,monthlyMortgageAmount:monthlyMortgageAmount};
-        let newItem = {propertyName: state.propertyName,
+        let newItem = {propertyname: state.propertyName,
         address: state.address,
         city: state.city,
         state: state.stateinput,
         zip: state.zip,
-        imageUrl: state.imageUrl,
-        monthlyMortgageAmount: state.monthlyMortgageAmount,
-        desiredMonthlyRent: state.desiredMonthlyRent
-        }        
-        let newlist = state.list.slice();
-        newlist.unshift(newItem);
-        
-        return{...state,list:newlist}
+        imageurl: state.imageUrl,
+        monthlymortgageamount: state.monthlyMortgageAmount,
+        desiredmonthlyrent: state.desiredMonthlyRent
+        }  
+        console.log(newItem);      
+        return{...state,item:newItem}
 
         case REMOVE_ITEM:
         let newList = state.list.slice();
@@ -60,11 +59,12 @@ export default function reducer(state = initalState, action) {          //brain 
         default:
             return state;
     }
+    console.log('item',state.item)
 }
 
 export function stepone(infoObj) {
 
-    console.log("step one fired", infoObj)
+    // console.log("step one fired", infoObj)
     return {
         type: STEP_ONE,
         payload: infoObj
@@ -72,7 +72,7 @@ export function stepone(infoObj) {
 }
 
 export function steptwo(imgUrl) {
-    console.log('step two fired',imgUrl);
+    // console.log('step two fired',imgUrl);
     return {
         type: STEP_TWO,
         payload: imgUrl
@@ -88,7 +88,7 @@ export function stepthree(infoObj) {
 }
 
 export function removeItem(index) {
-    console.log('remove button fired')
+    // console.log('remove button fired')
     return{
         type: REMOVE_ITEM,
         payload: index
@@ -96,7 +96,7 @@ export function removeItem(index) {
 }
 
 export function getList(arr){
-    console.log('get list fired ',arr)
+    // console.log('get list fired ',arr)
     return{
         type: GET_LIST,
         payload:arr

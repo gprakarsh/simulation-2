@@ -5,32 +5,27 @@ import { stepthree } from './../../../ducks/reducer';
 import axios from 'axios';
 
 class WizardThree extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             monthlyMortgageAmount: 0,
             desiredMonthlyRent: 0
         }
     }
 
-    mortInput(val){
-        this.setState({monthlyMortgageAmount:val})
+    mortInput(val) {
+        this.setState({ monthlyMortgageAmount: val })
     }
 
-    rentInput(val){
-        this.setState({desiredMonthlyRent:val})
+    rentInput(val) {
+        this.setState({ desiredMonthlyRent: val })
     }
 
-    submit(){
-        let infoObj = {
-            monthlyMortgageAmount:this.state.monthlyMortgageAmount,
-            desiredMonthlyRent:this.state.desiredMonthlyRent    
-        }
-        this.props.stepthree(infoObj)
-        let sendObj = this.props.list[0];
-        console.log(sendObj,'sendobj')
-        axios.post(`/api/houser/add`,sendObj).then(()=>{
-            console.log(sendObj,'Added object')
+    submit = () => {
+        let sendObj = this.props.item;
+        console.log(this.props.item, 'props wizard three')
+        axios.post(`/api/houser/add`, sendObj).then(() => {
+            console.log(sendObj, 'Added object')
         })
     }
 
@@ -44,15 +39,20 @@ class WizardThree extends Component {
                 </div>
                 <div className='MonthlyMortgageAmount'>
                     <h4>Monthly Mortgage Amount</h4>
-                    <input value={this.state.monthlyMortgageAmount} onChange={(e)=>this.mortInput(e.target.value)}/>
+                    <input value={this.state.monthlyMortgageAmount} onChange={(e) => this.mortInput(e.target.value)} />
                 </div>
                 <div className='DesiredMonthlyRent'>
                     <h4>Desired Monthly Rent</h4>
-                    <input value={this.state.desiredMonthlyRent} onChange={(e)=>{this.rentInput(e.target.value)}}/>
+                    <input value={this.state.desiredMonthlyRent} onChange={(e) => { this.rentInput(e.target.value) }} />
                 </div>
                 <div className='WizardThreeFooter'>
                     <Link to='/wizard/step2'><button>Previous Step</button></Link>
-                    <Link to='/'><button onClick={()=>this.submit()}>Complete</button></Link>
+                    <button onClick={
+                        () => this.props.stepthree({
+                            monthlyMortgageAmount: this.state.monthlyMortgageAmount,
+                            desiredMonthlyRent: this.state.desiredMonthlyRent
+                        })}>Submit</button>
+                    <Link to='/'><button onClick={this.submit}>Complete</button></Link>
                 </div>
             </div>
         )
@@ -60,8 +60,9 @@ class WizardThree extends Component {
 }
 
 function mapStateToProps(reduxState) {
+    console.log(reduxState, 'state at wizard three')
     return {
-        list:reduxState.list
+        item: reduxState.item
     }
 }
 

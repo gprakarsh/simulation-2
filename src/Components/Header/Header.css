@@ -1,0 +1,16 @@
+
+header{
+    background-color:#519872;
+    color:white;
+    font-weight: bold;
+    display:flex;
+    justify-content: center;
+    height:15vh;
+    width:100vw;
+}
+header img{
+    position: relative;
+    top :5vh;
+    right:2vw;
+}
+

@@ -17,7 +17,6 @@ class WizardTwo extends Component {
 
 
     render() {
-        // console.log(this.props.match);
         return (
             <div>
                 <div className='WizardTwoHeader'>

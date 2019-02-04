@@ -8,7 +8,7 @@ const ctrl = require('./controller')
 const app = express()
 app.use(bodyParser.json())
 
-// app.use( express.static( `${__dirname}/../build` ) )   
+app.use( express.static( `${__dirname}/../build` ) )   
 
 massive(process.env.CONNECTION_STRING).then(db => {
   app.set('db', db)

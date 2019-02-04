@@ -1,0 +1,39 @@
+
+h1{
+    margin: 0px;
+    padding: 0px;
+}
+.DashBoard {
+    display:flex;
+    flex-direction: column;
+    width:50%;
+    margin: 0px auto;
+    background-color: #AFD4C0;
+    
+}
+
+.DashBoardHeader{
+    display:flex;
+    justify-content: center;
+}
+
+.list_item{
+    background-color: #DEDEDE;
+    display:flex;
+    margin:8px;
+    flex-wrap:wrap;
+    flex-direction:column;
+    height:28vh;
+    font-size:11px;
+}
+
+.Image{
+    position:relative;
+    top:2vh;
+}
+
+#homeImage{
+    height:23vh;
+    width:auto;
+}
+

@@ -1,12 +1,12 @@
 insert into houser(
-property_name,
+propertyName,
 address ,
 city ,
 state ,
-zip ,
-image_url,
-monthly_mortgage ,
-desired_rent 
+zip,
+imageUrl,
+  monthlyMortgageAmount,
+    desiredmonthlyrent 
 )values(
 $1,
 $2,
@@ -14,6 +14,6 @@ $3,
 $4,
 $5,
 $6,
-$8,
-$7
+$7,
+$8
 );

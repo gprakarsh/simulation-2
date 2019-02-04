@@ -1,9 +1,9 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import {connect} from 'react-redux';
-import {stepone} from './../../../ducks/reducer';
+import { connect } from 'react-redux';
+import { stepone } from './../../../ducks/reducer';
 
-class WizardOne extends Component{
+class WizardOne extends Component {
     constructor() {
         super();
         this.state = {
@@ -12,7 +12,7 @@ class WizardOne extends Component{
             city: '',
             state: '',
             zip: 0
-        
+
         };
     }
 
@@ -39,17 +39,6 @@ class WizardOne extends Component{
         this.setState({ zip: val })
     }
 
-    submit() {
-        console.log(this.state)
-        let infoObj = {
-            propertyName: this.state.propertyName,
-            address: this.state.address,
-            city: this.state.city,
-            state: this.state.state,
-            zip: this.state.zip }
-        
-        this.props.stepone(infoObj)        
-    }
 
     render() {
         return (
@@ -86,7 +75,12 @@ class WizardOne extends Component{
                 </div>
 
                 <div className='WizardOneFooter'>
-                    <Link to='/wizard/step2'><button onClick={()=>this.submit()}>Next Step</button></Link>
+                    <Link to='/wizard/step2'><button onClick={() =>this.props.stepone({propertyName: this.state.propertyName,
+                            address: this.state.address,
+                            city: this.state.city,
+                            state: this.state.state,
+                            zip: this.state.zip
+                        })}>Next Step</button></Link>
                 </div>
             </div>
         )
@@ -99,7 +93,7 @@ function mapStateToProps(reduxState) {
 
 //output new info to redux 
 const mapDispatchToProps = {
-    stepone:stepone
+    stepone: stepone
 }
 
 const connectComp = connect(mapStateToProps, mapDispatchToProps)(WizardOne)
